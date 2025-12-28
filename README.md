@@ -55,7 +55,7 @@ Many job postings do **not** list salary, motivating the **ML-based salary estim
 
 ---
 
-## **Pipeline Architecture**
+## 🏗️ Pipeline Architecture
 
 ```text
 Raw Job Postings (CSV)
@@ -71,7 +71,9 @@ Skill Demand & Bundle Analysis
 Salary & Skill Insights
         ↓
 ML Salary Estimation (XGBoost)
-## 🔧 Data Cleaning
+```
+
+## 🔧 Data Cleaning 
 
 - Removed invalid or incomplete records  
 - Normalized and cleaned salary values  
