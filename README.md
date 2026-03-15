@@ -1,4 +1,4 @@
-# 💼 AI Job Market Skill Analysis & Salary Intelligence
+# AI Job Market Skill Analysis & Salary Intelligence
 
 **Scalable NLP, Spark, and Machine Learning pipeline** to analyze technical job skills, demand patterns, and estimate salaries from large-scale job posting data.
 
@@ -55,7 +55,7 @@ Many job postings do **not** list salary, motivating the **ML-based salary estim
 
 ---
 
-## 🏗️ Pipeline Architecture
+## Pipeline Architecture
 
 ```text
 Raw Job Postings (CSV)
@@ -73,7 +73,7 @@ Salary & Skill Insights
 ML Salary Estimation (XGBoost)
 ```
 
-## 🔧 Data Cleaning 
+## Data Cleaning 
 
 - Removed invalid or incomplete records  
 - Normalized and cleaned salary values  
@@ -83,7 +83,7 @@ ML Salary Estimation (XGBoost)
 
 ---
 
-## 🧠 Skill Extraction (spaCy)
+## Skill Extraction (spaCy)
 
 - Built a curated technical skill lexicon  
 - Used **spaCy PhraseMatcher** to extract atomic technical skills  
@@ -109,7 +109,7 @@ extracted_skills = {
 
 ---
 
-## ⚡ Spark Skill Processing
+## Spark Skill Processing
 
 - Loaded NLP output into Apache Spark  
 - Split and exploded skill lists into long format  
@@ -136,7 +136,7 @@ df_long = (
 
 ---
 
-## 📊 Skill Demand Analysis
+## Skill Demand Analysis
 
 Computed:
 - Top technical skills overall  
@@ -147,7 +147,7 @@ Computed:
 
 ---
 
-## 🔗 Skill Co-Occurrence (Skill Bundles)
+## Skill Co-Occurrence (Skill Bundles)
 
 Identified skills that frequently appear together within the same job posting.
 
@@ -210,7 +210,7 @@ skill_bundle_counts = (
 
 ---
 
-## 💰 Skill Bundles & Salary Analysis
+## Skill Bundles & Salary Analysis
 
 - Joined skill bundles with salary data  
 - Computed average salary per skill pair  
@@ -221,7 +221,7 @@ skill_bundle_counts = (
 
 ---
 
-## 🤖 Machine Learning: Salary Estimation
+## Machine Learning: Salary Estimation
 
 Many job postings do not list compensation.  
 A regression model was trained to estimate salaries for these postings.
@@ -276,7 +276,7 @@ model = xgb.XGBRegressor(
 
 ---
 
-## 🧩 Salary Completion Logic
+## Salary Completion Logic
 
 Final salary values are computed as:
 
@@ -288,7 +288,7 @@ This produces a unified `final_salary` column for downstream analysis.
 
 ---
 
-## 📦 Outputs
+## Outputs
 
 ### Analytics Outputs (Parquet)
 
@@ -304,11 +304,32 @@ This produces a unified `final_salary` column for downstream analysis.
 
 ---
 
-## 🧠 Design Decisions
+## Design Decisions
 
 - **spaCy before Spark** – NLP is executed once, not distributed  
 - **Atomic skills only** – avoids combinatorial explosion  
 - **Distinct job counting** – prevents inflated demand metrics  
 - **Salary clipping** – improves model stability  
 - **Early stopping** – prevents overfitting  
-- **Absolute error metrics** – more meaningful for salary prediction  
+- **Absolute error metrics** – more meaningful for salary prediction
+
+## Results
+Best iteration: 371
+RMSE (USD): 35,284.65
+MAE  (USD): 23,885.08
+R^2       : 0.5826
+<p align="center">
+  <img src="l1.png" width="45%">
+  <img src="l2.png" width="45%">
+</p>
+
+<p align="center">
+  <img src="output.png" width="45%">
+  <img src="2.png" width="45%">
+</p>
+
+<p align="center">
+  <img src="3.png" width="850">
+</p>
+
+
